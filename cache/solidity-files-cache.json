@@ -1,0 +1,134 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\WebDev\\minter_ethvjti\\contracts\\ETHVJTI1155.sol": {
+      "lastModificationDate": 1680921674095,
+      "contentHash": "c3eeb28caf558e532db817d9aeaea2e2",
+      "sourceName": "contracts/ETHVJTI1155.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@opengsn/contracts/src/ERC2771Recipient.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.0 <0.8.0",
+        ">=0.6.2 <0.8.0",
+        ">=0.6.2 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.2 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.0 <0.8.0",
+        ">=0.6.0 <0.8.0"
+      ],
+      "artifacts": [
+        "Address",
+        "Context",
+        "ERC1155",
+        "ERC165",
+        "EthVJTI1155",
+        "IERC1155",
+        "IERC1155MetadataURI",
+        "IERC1155Receiver",
+        "IERC165",
+        "Ownable",
+        "SafeMath"
+      ]
+    },
+    "D:\\WebDev\\minter_ethvjti\\node_modules\\@opengsn\\contracts\\src\\ERC2771Recipient.sol": {
+      "lastModificationDate": 1680874880341,
+      "contentHash": "a3f8c0bfa93fbf48114c0d9dedfeb5a0",
+      "sourceName": "@opengsn/contracts/src/ERC2771Recipient.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IERC2771Recipient.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.9"
+      ],
+      "artifacts": [
+        "ERC2771Recipient"
+      ]
+    },
+    "D:\\WebDev\\minter_ethvjti\\node_modules\\@opengsn\\contracts\\src\\interfaces\\IERC2771Recipient.sol": {
+      "lastModificationDate": 1680874887025,
+      "contentHash": "0e5ad1cd070b2093adf9d1139dbc6ee6",
+      "sourceName": "@opengsn/contracts/src/interfaces/IERC2771Recipient.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.6.0"
+      ],
+      "artifacts": [
+        "IERC2771Recipient"
+      ]
+    }
+  }
+}
