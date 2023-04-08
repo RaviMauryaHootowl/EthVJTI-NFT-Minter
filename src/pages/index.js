@@ -459,7 +459,6 @@ const Home = () => {
             pauseOnHover
             theme="light"
             />
-            <ToastContainer />
             <Modal
                 isOpen={isEmailVerifyModalOpen}
                 onRequestClose={closeEmailVerifyModal}
