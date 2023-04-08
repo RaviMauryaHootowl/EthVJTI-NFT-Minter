@@ -11,6 +11,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { BeatLoader } from "react-spinners";
+import Link from "next/link";
+import Head from "next/head";
 
 const HomePageBackground = styled.div`
     width: 100%;
@@ -54,6 +56,7 @@ const ConnectWalletBtn = styled.button`
     color: #423aaa;
     font-size: 1rem;
     transition: all 0.5s ease;
+    margin-left: 1rem;
     &:hover {
         transform: translateY(-3px);
     }
@@ -76,10 +79,18 @@ const NFTCard = styled.div`
     align-items: center;
 `;
 
+const HideLayer = styled.div`
+    overflow: hidden;
+    height: 0;
+`;
+
 const NFTImage = styled.div`
-    width: 300px;
-    height: 400px;
-    background-image: linear-gradient(to bottom, #b78cff, #7d2dff);
+
+    width: ${props => (props.big ? "500px" : "280px")};
+    height: ${props => (props.big ? "714px" : "400px")};
+    background-image: url('/nfttemplate.png');
+    background-size: contain;
+    background-repeat: no-repeat;
     border-radius: 1rem;
     margin-bottom: 1rem;
     transition: all 0.5s ease;
@@ -90,6 +101,17 @@ const NFTImage = styled.div`
         transform: rotateZ(-2deg) scale(1.05);
         box-shadow: #0000005a 4px 4px 40px;
     }
+`;
+
+const NFTImageTop = styled.div`
+    flex: 9;
+`
+
+const NFTImageBottom = styled.div`
+    flex: 2;
+    color: white;
+    font-family: 'RedHatMono', monospace;
+    font-size: ${props => (props.big ? "2.7rem" : "1.6rem")};
 `;
 
 const NFTName = styled.span`
@@ -194,10 +216,14 @@ const Home = () => {
         const element = document.getElementById("nftcard");
         const canvas = await html2canvas(element);
 
+        // var link = document.createElement('a');
+        // link.download = 'filename.png';
+        // link.href = canvas.toDataURL()
+        // link.click();
+
         const blob = await new Promise((resolve) => canvas.toBlob(resolve));
         var file = new File([blob], "nftImage");
         return file;
-        // return image;
     };
 
     const uploadImageToIPFS = async (imageFile) => {
@@ -255,6 +281,7 @@ const Home = () => {
         const { data } = await contractInstance.populateTransaction.userMint(
             `https://${uriCid}.ipfs.w3s.link/nftUri`
         );
+        
         let txParams = {
             data: data,
             to: contract_address,
@@ -315,7 +342,7 @@ const Home = () => {
             try {
                 await window.ethereum.request({
                     method: "wallet_switchEthereumChain",
-                    params: [{ chainId: ethers.utils.hexValue(80001) }],
+                    params: [{ chainId: ethers.utils.hexValue(137) }],
                 });
             } catch (switchError) {
                 if (switchError.code === 4902) {
@@ -323,18 +350,18 @@ const Home = () => {
                         method: "wallet_addEthereumChain",
                         params: [
                             {
-                                chainId: ethers.utils.hexValue(80001),
+                                chainId: ethers.utils.hexValue(137),
                                 rpcUrls: [
-                                    "https://rpc.ankr.com/polygon_mumbai",
+                                    "https://polygon-rpc.com/",
                                 ],
-                                chainName: "Polygon Mumbai",
+                                chainName: "Polygon",
                                 nativeCurrency: {
                                     name: "MATIC",
                                     symbol: "MATIC",
                                     decimals: 18,
                                 },
                                 blockExplorerUrls: [
-                                    "https://mumbai.polygonscan.com/",
+                                    "https://polygonscan.com/",
                                 ],
                             },
                         ],
@@ -362,6 +389,7 @@ const Home = () => {
         }
     };
 
+
     const handleSendOTP = async () => {
         if(isLoading){ return; }
       try{
@@ -381,6 +409,9 @@ const Home = () => {
     };
 
     const verifyOTP = async (otpCode) => {
+        if(otpCode.trim() == ""){
+            return false;
+        }
       try{
         const res = await axios.get(
           "https://www.communityofcoders.in/server/api/ethvjti/verifyotp",{
@@ -401,7 +432,7 @@ const Home = () => {
             const res = await axios.post(
                 "https://www.communityofcoders.in/server/api/ethvjti/setminted",
                 {
-                    email: emailId,
+                    email: userEmail,
                     walletAddress: address,
                 }
             );
@@ -413,6 +444,9 @@ const Home = () => {
 
     return (
         <HomePageBackground>
+            <Head>
+                <title>EthVJTI Minter</title>
+            </Head>
           <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -469,17 +503,33 @@ const Home = () => {
                     <img src={"/logo.svg"} />
                     <span>EthVJTI Minter</span>
                 </Logo>
-                <ConnectWalletBtn onClick={handleMetamaskConnectWallet}>
-                    {address == ""
-                        ? "Connect Wallet"
-                        : `${address.substring(0, 6)}...${address.substring(
-                              38
-                          )}`}
-                </ConnectWalletBtn>
+                <div>
+                    <Link href={"https://opensea.io/collection/ethvjti-token"} target="_blank">
+                        <ConnectWalletBtn>
+                            View NFTs
+                        </ConnectWalletBtn>
+                    </Link>
+                    <ConnectWalletBtn onClick={handleMetamaskConnectWallet}>
+                        {address == ""
+                            ? "Connect Wallet"
+                            : `${address.substring(0, 6)}...${address.substring(
+                                38
+                            )}`}
+                    </ConnectWalletBtn>
+                </div>
             </NavbarContainer>
             <MainContentContainer>
                 <NFTCard>
-                    <NFTImage id="nftcard">Hello {username}</NFTImage>
+                    <NFTImage big={false}>
+                        <NFTImageTop></NFTImageTop>
+                        <NFTImageBottom>0x{username}</NFTImageBottom>
+                    </NFTImage>
+                    <HideLayer>
+                        <NFTImage big={true}  id="nftcard">
+                            <NFTImageTop></NFTImageTop>
+                            <NFTImageBottom big={true}>0x{username}</NFTImageBottom>
+                        </NFTImage>
+                    </HideLayer>
                     <NFTName>EthVJTI Launch NFT</NFTName>
                     <NameInput>
                         <input
@@ -489,6 +539,7 @@ const Home = () => {
                             onChange={(e) => {
                                 setUsername(e.target.value);
                             }}
+                            maxLength={13}
                         />
                         <ClaimBtn
                             onClick={() => {

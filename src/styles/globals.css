@@ -6,6 +6,11 @@
 }
 
 @font-face {
+  font-family: 'RedHatMono';
+  src: local('RedHatMono'), url(./fonts/RedHatMono-Medium.ttf) format('opentype');
+}
+
+@font-face {
   font-family: 'NeueMachina';
   src: local('NeueMachina'), url(./fonts/NeueMachina-Regular.otf) format('opentype');
 }
