@@ -448,7 +448,7 @@ const Home = () => {
                 <title>EthVJTI Minter</title>
             </Head>
           <ToastContainer
-            position="top-right"
+            position="bottom-right"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
@@ -543,7 +543,11 @@ const Home = () => {
                         />
                         <ClaimBtn
                             onClick={() => {
-                                openEmailVerifyModal();
+                                if(env.IS_LIVE == "yes"){
+                                    openEmailVerifyModal();
+                                }else{
+                                    toast.info("Minter is not live yet!");
+                                }
                             }}
                         >
                             Mint

@@ -3,7 +3,8 @@ const nextConfig = {
   env: {
     WEB3_STORAGE_API: process.env.WEB3_STORAGE_API,
     BICONOMY_API: process.env.BICONOMY_API,
-    CONTRACT_ADDRESS: process.env.CONTRACT_ADDRESS
+    CONTRACT_ADDRESS: process.env.CONTRACT_ADDRESS,
+    IS_LIVE: process.env.IS_LIVE
   },
   reactStrictMode: true,
   webpack: config => {
